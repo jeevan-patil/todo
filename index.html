@@ -3,19 +3,24 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Todo App</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+        }
+    </style>
 </head>
 <body ng-app="todoApp">
 <h1>My Todo App</h1>
 <div ng-controller="TodoCtrl">
     <div>
-        <input type="text" placeholder="Enter Todo" ng-model="newTodo.text" >
+        <input type="text" placeholder="Enter Todo" ng-model="newTodo.text" ng-keypress="keypress()" autofocus="true">
         <input type="hidden" value="false" ng-model="newTodo.completed">
         <button ng-click="add()">Add</button>
     </div>
     <br>
     <div ng-repeat="item in todos">
         <input type="checkbox" ng-model="item.completed">
-        <span ng-bind="item.text"></span>
+        <span ng-bind="item.text" ng-class="{'completed': item.completed}"></span>
         <button ng-click="delete($index)">X</button>
     </div>
     <br>
@@ -23,6 +28,9 @@
 </div>
 
 <script src="app/lib/angular.min.js"></script>
+<script src="app/scripts/todo/todo.module.js"></script>
+<script src="app/scripts/todo/controllers/todo.controller.js"></script>
+<script src="app/scripts/todo/services/todo.service.js"></script>
 <script src="app/scripts/app.js"></script>
 </body>
 </html>
